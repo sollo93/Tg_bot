@@ -1,0 +1,248 @@
+/* Сброс и общие стили */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  color: #1f2937;
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Заголовок */
+header {
+  background-color: #f3f4f6; /* светло-серый фон */
+  padding: 40px 20px 30px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+header h1 {
+  font-size: 2.75rem;
+  color: #111827;
+  margin-bottom: 0.4em;
+  font-weight: 700;
+}
+
+header p {
+  font-size: 1.125rem;
+  color: #4b5563;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Навигация */
+nav {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav a {
+  display: inline-block;
+  padding: 14px 20px;
+  font-weight: 600;
+  color: #3b82f6;
+  text-decoration: none;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  background-color: #3b82f6;
+  color: #fff;
+  outline: none;
+}
+
+/* Для централизованного меню */
+nav {
+  text-align: center;
+}
+
+/* Разделы */
+section {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 0 15px;
+}
+
+section h2 {
+  font-size: 2rem;
+  color: #111827;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #3b82f6;
+  padding-bottom: 8px;
+  font-weight: 700;
+}
+
+/* Абзацы */
+section p {
+  font-size: 1.125rem;
+  color: #4b5563;
+  line-height: 1.7;
+  max-width: 700px;
+  margin-bottom: 15px;
+}
+
+/* Таблица прайс-листа */
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  color: #374151;
+  margin-top: 10px;
+}
+
+.price-table th,
+.price-table td {
+  border: 1px solid #d1d5db;
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.price-table thead th {
+  background-color: #e0e7ff; /* светло-синий фон заголовка */
+  font-weight: 700;
+  color: #1e40af;
+}
+
+/* Стили для названий подразделов в таблице */
+.price-table tbody th {
+  text-align: left;
+  background-color: #f0f9ff; /* светлый голубой */
+  font-weight: 700;
+  font-size: 1.125rem;
+  padding: 10px 16px;
+  color: #2563eb;
+  border-top: 2px solid #2563eb;
+  border-bottom: 2px solid #2563eb;
+}
+
+.price-table tbody th + th {
+  border: none; /* убрать границу во второй ячейке заголовка подраздела */
+}
+
+/* Блок лицензий */
+.licenses {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.licenses img {
+  max-height: 100px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  transition: transform 0.3s ease;
+}
+
+.licenses img:hover, .licenses img:focus {
+  outline: none;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* Социальные ссылки */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.social-links a {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #3b82f6;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover,
+.social-links a:focus-visible {
+  color: #2563eb;
+  outline: none;
+}
+
+/* Контакты */
+#contacts p strong {
+  color: #111827;
+}
+
+/* Футер */
+footer {
+  background-color: #1e293b;
+  color: #94a3b8;
+  text-align: center;
+  padding: 25px 15px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-top: 60px;
+}
+
+/* Мобильная адаптивность */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  section {
+    margin: 30px 15px;
+    padding: 0 10px;
+  }
+
+  nav a {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+
+  .price-table th,
+  .price-table td {
+    padding: 10px 8px;
+    font-size: 0.9rem;
+  }
+
+  .licenses img {
+    max-height: 70px;
+  }
+
+  .social-links {
+    gap: 20px;
+  }
+}
+
+/* Стиль выделения текста */
+::selection {
+  background-color: #3b82f6;
+  color: #fff;
+}
+#services p {
+  max-width: 700px;
+  margin: 0 auto 1.2em auto;
+  font-size: 1.125rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+#services strong {
+  color: #3b82f6;
+}
+
+#services em {
+  font-style: italic;
+  color: #6b7280;
+}
