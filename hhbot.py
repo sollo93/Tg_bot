@@ -1,7 +1,9 @@
+import os
+from dotenv import load_dotenv
 import requests
 from bs4 import BeautifulSoup
 from telegram import (
-    Update, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
+    Update, InlineKeyboardButton, InlineKeyboardMarkup
 )
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, ContextTypes, ConversationHandler,
@@ -10,7 +12,11 @@ from telegram.ext import (
 import logging
 import asyncio
 
-TOKEN = '7995985389:AAHasg1b6WFfoW7HVdGqMrEIeOQn6dz-PW0'
+# ========== Загрузка переменных окружения ==========
+load_dotenv()
+
+# --- Telegram настройки ---
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_TOKEN')
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -71,7 +77,6 @@ async def get_hh_jobs(keywords, salary=None, region='113', page=0):
         items = resp.json().get('items', [])
         for job in items:
             name = job.get('name', 'Название не указано')
-            # В поиске — фильтруем по словам не только в названии, но и snippe-тах
             description = job.get('snippet', {}).get('requirement', '') + job.get('snippet', {}).get('responsibility', '')
             combined_text = (name + ' ' + description).lower()
             if any(kw.lower() in combined_text for kw in keywords):
@@ -216,11 +221,12 @@ async def send_jobs_now(chat_id, context):
     msg += "\n\n🛒 Avito:\n"
     msg += "\n".join([f"🔸 {j}" for j in jobs_avito]) if jobs_avito else "❌ Нет вакансий"
     # Добавим кнопки пагинации
-    keyboard = []
-    keyboard.append([
-        InlineKeyboardButton("⬅️ Назад", callback_data="prev"),
-        InlineKeyboardButton("➡️ Дальше", callback_data="next"),
-    ])
+    keyboard = [
+        [
+            InlineKeyboardButton("⬅️ Назад", callback_data="prev"),
+            InlineKeyboardButton("➡️ Дальше", callback_data="next"),
+        ]
+    ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await context.bot.send_message(chat_id=chat_id, text=msg, reply_markup=reply_markup, disable_web_page_preview=True)
 
@@ -242,8 +248,9 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('Операция отменена.')
     return ConversationHandler.END
 
+
 if __name__ == '__main__':
-    app = ApplicationBuilder().token(TOKEN).build()
+    app = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
 
     app.add_handler(CommandHandler('start', start_command))
     app.add_handler(CommandHandler('help', help_command))
